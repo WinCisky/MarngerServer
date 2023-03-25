@@ -100,7 +100,7 @@ func sendAllPlayersPos(conn *net.UDPConn) {
 		// Send data to all players except the player itself
 		for _, thePlayer := range players {
 			if thePlayer.address.String() != player.address.String() {
-				sendResponse(conn, player.address, data)
+				sendResponse(conn, thePlayer.address, data)
 			}
 		}
 	}
