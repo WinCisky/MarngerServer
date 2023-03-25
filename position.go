@@ -22,6 +22,8 @@ type player struct {
 var players = make(map[string]*player)
 var playerID int = 0
 
+const TIMEOUTTIME int64 = 10
+
 func receivedPosition(conn *net.UDPConn, addr *net.UDPAddr, msg []byte) {
 	// Decode scene as int32
 	scene := binary.LittleEndian.Uint32(msg[0:4])
@@ -61,7 +63,7 @@ func receivedPosition(conn *net.UDPConn, addr *net.UDPAddr, msg []byte) {
 // send all players to all players
 func sendAllPlayersPos(conn *net.UDPConn) {
 
-	timeout := getTime() - 120
+	timeout := getTime() - TIMEOUTTIME
 
 	for _, player := range players {
 
